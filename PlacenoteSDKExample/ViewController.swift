@@ -158,10 +158,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         
         let body = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: start))
         start.physicsBody = body
-        start.physicsBody?.collisionBitMask = BodyType.camera.rawValue | BodyType.arrow.rawValue | BodyType.destination.rawValue
         start.physicsBody?.categoryBitMask = BodyType.start.rawValue
-        start.physicsBody?.contactTestBitMask = BodyType.camera.rawValue | BodyType.arrow.rawValue | BodyType.destination.rawValue
-        start.physicsBody?.restitution = 1
+      }else if(node.name == "Arrow"){
+        print("In Arrow")
+        let arrow = node
+        
+        let body = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: arrow))
+        arrow.physicsBody = body
+        arrow.physicsBody?.categoryBitMask = BodyType.arrow.rawValue
+      }else if(node.name == "Destination"){
+        print("In Destination")
+        let destination = node
+        
+        let body = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: destination))
+        destination.physicsBody = body
+        destination.physicsBody?.categoryBitMask = BodyType.destination.rawValue
       }
     }
   }
