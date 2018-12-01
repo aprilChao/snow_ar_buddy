@@ -46,10 +46,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     @IBOutlet var nodeTypeLabel: UILabel!
     @IBOutlet var collisionLabel: UILabel!
     @IBOutlet var collisionSelection: UISwitch!
+    @IBOutlet var pathSelection: UISegmentedControl!
+    @IBOutlet var pathLabel: UILabel!
     
     
     //AR Scene
     private var scnScene: SCNScene!
+  private var cameraNode: SCNNode!
     
     //Status variables to track the state of the app with respect to libPlacenote
     private var trackingStarted: Bool = false;
@@ -76,7 +79,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     private var planeDetection: Bool = false
     private var deleteNode: Bool = false
     private var collisionFeature: Bool = false
-    private var selectedSegment: Int = 0
+    private var selectedNodeType: Int = 0
+    private var selectedPath: Int = 0
     
     private var locationManager: CLLocationManager!
     private var lastLocation: CLLocation? = nil
@@ -130,27 +134,27 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         // Pause the view's session
         scnView.session.pause()
     }
+  
+  func createCameraNode(){
+    let ball = SCNCapsule(capRadius:0.1, height:2.0)
+    ball.materials.first?.diffuse.contents = UIColor(hue: 0, saturation: 0, brightness: 0, alpha: 0)
+    //ball.materials.first?.diffuse.contents = UIColor.red
+    cameraNode = SCNNode(geometry: ball)
+    cameraNode.position = SCNVector3Make(0, 0, -1)
+    cameraNode.name = "Camera"
     
-    func setupCollisions(){
-        let ball = SCNCapsule(capRadius:0.1, height:2.0)
-        ball.materials.first?.diffuse.contents = UIColor(hue: 0, saturation: 0, brightness: 0, alpha: 0)
-        //ball.materials.first?.diffuse.contents = UIColor.red
-        let camera = SCNNode(geometry: ball)
-        camera.position = SCNVector3Make(0, 0, -1)
-        camera.name = "Camera"
-        
-        let body = SCNPhysicsBody(type: .kinematic, shape: SCNPhysicsShape(node: camera))
-        camera.physicsBody = body
-        camera.physicsBody?.isAffectedByGravity = false
-        camera.physicsBody?.collisionBitMask = BodyType.start.rawValue | BodyType.arrow.rawValue | BodyType.destination.rawValue
-        
-        camera.physicsBody?.categoryBitMask = BodyType.camera.rawValue
-        camera.physicsBody?.contactTestBitMask = BodyType.start.rawValue | BodyType.arrow.rawValue | BodyType.destination.rawValue
-        
-        scnView.pointOfView?.addChildNode(camera)
-        
-        
-        
+    let body = SCNPhysicsBody(type: .kinematic, shape: SCNPhysicsShape(node: cameraNode))
+    cameraNode.physicsBody = body
+    cameraNode.physicsBody?.isAffectedByGravity = false
+    cameraNode.physicsBody?.collisionBitMask = BodyType.start.rawValue | BodyType.arrow.rawValue | BodyType.destination.rawValue
+    
+    cameraNode.physicsBody?.categoryBitMask = BodyType.camera.rawValue
+    cameraNode.physicsBody?.contactTestBitMask = BodyType.start.rawValue | BodyType.arrow.rawValue | BodyType.destination.rawValue
+    
+    scnView.pointOfView?.addChildNode(cameraNode)
+  }
+    
+    func setupCollisions(){        
         self.scnView.scene.rootNode.enumerateChildNodes { (node, _) in
             if(node.name == "Start"){
                 print("In Start")
@@ -426,8 +430,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     }
     @IBAction func nodeTypeDetection(_ sender: UISegmentedControl) {
         // 0 = start, 1 = arrow, 2 = destination
-        selectedSegment = sender.selectedSegmentIndex
-        print("Selected Segment: /{currentValue}")
+        selectedNodeType = sender.selectedSegmentIndex
+        print("Selected Segment: /{selectedNodeType}")
         
     }
     
@@ -440,6 +444,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         deleteNode = !deleteNode
     }
     
+    @IBAction func pathDetection(_ sender: UISegmentedControl) {
+        // 0 = path 1, 1 = path 2, 2 = path 3
+        selectedPath = sender.selectedSegmentIndex
+        print("Selected Path: /{selectedPath}")
+    }
     
     func configureSession() {
         // Create a session configuration
@@ -469,6 +478,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     
     @IBAction func toggleCollisionFeature(_ sender: Any) {
         collisionFeature = !collisionFeature
+      if(collisionFeature){
+        createCameraNode()
+      }else{
+        cameraNode.removeFromParentNode()
+      }
         print("toggle Collision")
         print(collisionFeature)
     }
@@ -498,6 +512,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         nodeTypeSelection.isHidden = on
         collisionLabel.isHidden = on
         collisionSelection.isHidden = on
+        pathLabel.isHidden = on
+        pathSelection.isHidden = on
     }
     
     // MARK: - UITableViewDelegate and UITableviewDataSource to manage retrieving, viewing, deleting and selecting maps on a TableView
@@ -662,7 +678,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         }else if let result = hitResultsIns.first {
             print("Placed Node")
             let pose = LibPlacenote.instance.processPose(pose: result.worldTransform)
-            shapeManager.spawnShape(position: pose.position(), nodeType: selectedSegment)
+          shapeManager.spawnShape(position: pose.position(), nodeType: selectedNodeType, path: selectedPath)
         }
     }
     
