@@ -47,7 +47,7 @@ func generateRandomColor() -> UIColor {
 
 //Class to manage a list of shapes to be view in Augmented Reality including spawning, managing a list and saving/retrieving from persistent memory using JSON
 class ShapeManager {
-    private var nodeName: Int = 0 
+    private var nodeName: Int = 0
     private var scnScene: SCNScene!
     private var scnView: SCNView!
     
@@ -147,16 +147,19 @@ class ShapeManager {
     }
     
     func placeShape (position: SCNVector3, type: ShapeType, color: String, path: Int) {
-        let shapeNode = ShapeNode(name: nodeName, type: type, path: path, color: color, position: position, orientation: [0,0,0], scale: [1,1,1])
+        let shapeNode = ShapeNode(name: nodeName, type: type, path: path, color: color, position: position, orientation: [0,0,0], scale: [0.5,0.5,0.5])
         nodeName += 1
         let node = shapeNode.getNode()
         if(selectedSegment == 0){
             node.name = "Start"
+            shapeNode.scaleNode(x: 0.2, y: 0.2, z: 0.2)
         }else if(selectedSegment == 1){
             node.name = "Arrow"
             shapeNode.rotateNode(x: 90, y: 180, z: 0)
+            shapeNode.scaleNode(x: 0.4, y: 0.4, z: 0.3)
         }else{
             node.name = "Destination"
+            shapeNode.scaleNode(x: 0.18, y: 0.2, z: 0.18)
         }
         scnScene.rootNode.addChildNode(node)
         shapesDrawn = true

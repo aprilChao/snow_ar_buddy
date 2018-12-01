@@ -27,8 +27,8 @@ class ShapeNode{
         nodeType = type
         nodeColor = color
         nodePosition = position
-        nodeOrientation = [0,0,0]
-        nodeScale = [1,1,1]
+        nodeOrientation = orientation
+        nodeScale = scale
         node = createNode()
     }
     
