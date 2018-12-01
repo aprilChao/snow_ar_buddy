@@ -38,6 +38,7 @@ class ShapeNode{
         nodeOrientation[0] += x
         nodeOrientation[1] += y
         nodeOrientation[2] += z
+        print(nodeOrientation)
         node.runAction(SCNAction.rotateBy(x: toRadian(x), y: toRadian(y), z: toRadian(z), duration: 0))
     }
     

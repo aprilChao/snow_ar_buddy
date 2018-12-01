@@ -698,7 +698,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
       if (hitResultsNode.count > 0) {
         let result = hitResultsNode[0] as! SCNHitTestResult
         let node = result.node
-        let shapeNode = shapeManager.findShapeNode("\(node.name)")
+        print("hit: \(node.name)")
+        let shapeNode = shapeManager.findShapeNode(node.name!)
         if deleteNode{
           print("Deleted Node")
           print(node.name)
