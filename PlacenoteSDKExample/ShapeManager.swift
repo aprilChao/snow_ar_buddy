@@ -167,7 +167,7 @@ class ShapeManager {
         }else if(selectedSegment == 1){
             geometryNode.name = "Arrow"
             geometryNode.runAction(SCNAction.rotateBy(x: 0, y: (180 * .pi / 180), z: 0, duration: 0))
-            geometryNode.runAction(SCNAction.rotateBy(x: (90 * .pi / 180), y: 0, z: 0, duration: 0))
+            geometryNode.runAction(SCNAction.rotateBy(x: (90 * .pi / 180), y: 0, z: 0, duration: 0)) 
         }else{
             geometryNode.name = "Destination"
         }
