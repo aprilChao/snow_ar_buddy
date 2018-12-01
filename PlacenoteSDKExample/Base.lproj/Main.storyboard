@@ -155,7 +155,7 @@
                                 <rect key="frame" x="347" y="200" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="toggleCollisionFeature:" destination="BV1-FR-VrT" eventType="valueChanged" id="xPq-IE-AeW"/>
+                                    <action selector="toggleCollisionFeature:" destination="BV1-FR-VrT" eventType="valueChanged" id="uU5-7x-NSl"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Collision" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgI-ZN-vX0" userLabel="Collision Label">
@@ -209,7 +209,7 @@
                     </view>
                     <connections>
                         <outlet property="collisionLabel" destination="sgI-ZN-vX0" id="mRF-fn-9nN"/>
-                        <outlet property="collisionSelection" destination="xXY-Ci-vxs" id="WbF-lx-jqp"/>
+                        <outlet property="collisionSelection" destination="xXY-Ci-vxs" id="8Jm-H5-jI4"/>
                         <outlet property="deleteNodeLabel" destination="Kw6-YQ-hTd" id="b4C-7w-1Ys"/>
                         <outlet property="deleteNodeSelection" destination="juZ-V7-vby" id="LSi-JM-2p6"/>
                         <outlet property="fileTransferLabel" destination="BJ5-11-JDS" id="4Bg-UM-2xS"/>

@@ -38,7 +38,9 @@ public enum ShapeType:Int {
     static func genPyramid() -> ShapeType {
         return ShapeType(rawValue: Int(2))!
     }
-    
+    static func genCone() -> ShapeType {
+        return ShapeType(rawValue: Int(6))!
+    }
     static func createArrow() -> SCNGeometry {
         
         let path = UIBezierPath()

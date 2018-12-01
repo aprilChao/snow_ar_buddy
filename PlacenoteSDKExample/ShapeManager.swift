@@ -166,6 +166,8 @@ class ShapeManager {
             geometryNode.name = "Start"
         }else if(selectedSegment == 1){
             geometryNode.name = "Arrow"
+            geometryNode.runAction(SCNAction.rotateBy(x: 0, y: (180 * .pi / 180), z: 0, duration: 0))
+            geometryNode.runAction(SCNAction.rotateBy(x: (90 * .pi / 180), y: 0, z: 0, duration: 0))
         }else{
             geometryNode.name = "Destination"
         }
@@ -187,7 +189,7 @@ class ShapeManager {
         geometryNode.position = position
         geometryNode.physicsBody = SCNPhysicsBody.static()
         if selectedSegment == 1{
-            geometryNode.scale = SCNVector3(x:0.6, y:0.6, z:0.6)
+            geometryNode.scale = SCNVector3(x:0.5, y:0.5, z:0.4)
         }else{
             geometryNode.scale = SCNVector3(x:0.2, y:0.2, z:0.2)
         }
