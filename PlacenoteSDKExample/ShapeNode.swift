@@ -10,7 +10,6 @@ import Foundation
 import SceneKit
 
 class ShapeNode{
-    private var nodeName: Int
     private var nodePath: Int
     private var nodeType: ShapeType
     private var nodeColor: String
@@ -21,8 +20,7 @@ class ShapeNode{
     //SCNAction.rotateBy(x: toRadian(10), y: toRadian(20), z: toRadian(30), duration: 0)
     //orientation: [x,y,z]
     
-    init(name: Int, type: ShapeType, path: Int, color: String, position: SCNVector3, orientation: [CGFloat], scale: [Float]){
-        nodeName = name
+    init(type: ShapeType, path: Int, color: String, position: SCNVector3, orientation: [CGFloat], scale: [Float]){
         nodePath = path
         nodeType = type
         nodeColor = color
@@ -49,11 +47,7 @@ class ShapeNode{
         nodeScale[2] = z
         node.scale = SCNVector3(x: x, y: y, z: z)
     }
-    
-    func getName() -> Int{
-        return nodeName
-    }
-    
+
     func getPath() -> Int{
         return nodePath
     }
@@ -71,7 +65,7 @@ class ShapeNode{
             return UIColor.purple
         }
     }
-    
+
     func createNode() -> SCNNode{
             let geometry: SCNGeometry = ShapeType.generateGeometry(s_type: nodeType)
             geometry.materials.first?.diffuse.contents = getColor()
@@ -89,11 +83,10 @@ class ShapeNode{
     }
     
     func toString() -> [String: String]{
-        return ["name": "\(nodeName)", "path": "\(nodePath)", "type": "\(nodeType.rawValue)", "color": "\(nodeColor)", "pos-x": "\(nodePosition.x)",  "pos-y": "\(nodePosition.y)",  "pos-z": "\(nodePosition.z)", "orient-x": "\(nodeOrientation[0])", "orient-y": "\(nodeOrientation[1])", "orient-z": "\(nodeOrientation[2])", "scale-x": "\(nodeScale[0])", "scale-y": "\(nodeScale[1])", "scale-z": "\(nodeScale[2])"]
+        return ["path": "\(nodePath)", "type": "\(nodeType.rawValue)", "color": "\(nodeColor)", "pos-x": "\(nodePosition.x)",  "pos-y": "\(nodePosition.y)",  "pos-z": "\(nodePosition.z)", "orient-x": "\(nodeOrientation[0])", "orient-y": "\(nodeOrientation[1])", "orient-z": "\(nodeOrientation[2])", "scale-x": "\(nodeScale[0])", "scale-y": "\(nodeScale[1])", "scale-z": "\(nodeScale[2])"]
     }
     
     static func toNode(_ strArr: [String: String]) -> ShapeNode{
-        let name = Int(strArr["name"]!)
         let path = Int(strArr["path"]!)
         let type = ShapeType(rawValue: Int(strArr["type"]!)!)!
         let color = strArr["color"]
@@ -107,6 +100,6 @@ class ShapeNode{
         let sy: String = strArr["scale-y"]!
         let sz: String = strArr["scale-z"]!
         let scale = [Float(NumberFormatter().number(from: sx)!), Float(NumberFormatter().number(from: sy)!), Float(NumberFormatter().number(from: sz)!)]
-        return ShapeNode(name: name!, type: type, path: path!, color: color!, position: position, orientation: orientation, scale: scale)
+        return ShapeNode(type: type, path: path!, color: color!, position: position, orientation: orientation, scale: scale)
     }
 }

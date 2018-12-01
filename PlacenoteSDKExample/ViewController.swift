@@ -48,9 +48,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   @IBOutlet var collisionSelection: UISwitch!
   @IBOutlet var pathSelection: UISegmentedControl!
   @IBOutlet var pathLabel: UILabel!
-    @IBOutlet var pathEnablerLabel: UILabel!
-    @IBOutlet var pathEnabler: UISwitch!
-    
+  @IBOutlet var pathEnablerLabel: UILabel!
+  @IBOutlet var pathEnabler: UISwitch!
+  
   
   //AR Scene
   private var scnScene: SCNScene!
@@ -78,7 +78,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   private var planesVizNodes = [UUID: SCNNode]();
   
   private var showFeatures: Bool = true
-    private var showPath: Bool = false
+  private var showPath: Bool = false
   private var planeDetection: Bool = false
   private var deleteNode: Bool = false
   private var collisionFeature: Bool = false
@@ -158,30 +158,31 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   }
   
   func setupCollisions(){        
-    self.scnView.scene.rootNode.enumerateChildNodes { (node, _) in
-      if(node.name == "Start"){
-        print("In Start")
-        let start = node
-        
-        let body = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: start))
-        start.physicsBody = body
-        start.physicsBody?.categoryBitMask = BodyType.start.rawValue
-      }else if(node.name == "Arrow"){
-        print("In Arrow")
-        let arrow = node
-        
-        let body = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: arrow))
-        arrow.physicsBody = body
-        arrow.physicsBody?.categoryBitMask = BodyType.arrow.rawValue
-      }else if(node.name == "Destination"){
-        print("In Destination")
-        let destination = node
-        
-        let body = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: destination))
-        destination.physicsBody = body
-        destination.physicsBody?.categoryBitMask = BodyType.destination.rawValue
-      }
-    }
+    /*self.scnView.scene.rootNode.enumerateChildNodes { (node, _) in
+     let nodeName = node.name
+     if(nodeName!.hasPrefix("Start")){
+     print("In Start")
+     let start = node
+     
+     let body = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: start))
+     start.physicsBody = body
+     start.physicsBody?.categoryBitMask = BodyType.start.rawValue
+     }else if(nodeName!.hasPrefix("Arrow")){
+     print("In Arrow")
+     let arrow = node
+     
+     let body = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: arrow))
+     arrow.physicsBody = body
+     arrow.physicsBody?.categoryBitMask = BodyType.arrow.rawValue
+     }else if(nodeName!.hasPrefix("Destination")){
+     print("In Destination")
+     let destination = node
+     
+     let body = SCNPhysicsBody(type: .static, shape: SCNPhysicsShape(node: destination))
+     destination.physicsBody = body
+     destination.physicsBody?.categoryBitMask = BodyType.destination.rawValue
+     }
+     }*/
   }
   
   func physicsWorld(_ world: SCNPhysicsWorld, didUpdate contact: SCNPhysicsContact) {
@@ -189,8 +190,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
       print("Update Contact Happened")
       contact.nodeA.opacity = 0
       contact.nodeB.opacity = 0
+      /*let shapeNode: ShapeNode
+       if(contact.nodeA.name == "cameraNode"){
+       shapeNode = shapeManager.findShapeNode("\(contact.nodeB.name)")
+       }else{
+       shapeNode = shapeManager.findShapeNode("\(contact.nodeA.name)")
+       }
+       if(shapeNode.isDestination()){
+       
+       }else{
+       shapeNode.setHidden(true)
+       }*/
     }
-    
   }
   
   //Function to setup the view and setup the AR Scene including options
@@ -436,16 +447,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     selectedNodeType = sender.selectedSegmentIndex
     print("Selected Segment: \(selectedNodeType)")
   }
-    
-    @IBAction func togglePath(_ sender: Any) {
-        showPath = !showPath
-        if(showPath){
-            shapeManager.loadPath(path: selectedPath, parent: scnScene.rootNode)
-        }else{
-            shapeManager.drawView(parent: scnScene.rootNode)
-        }
+  
+  @IBAction func togglePath(_ sender: Any) {
+    showPath = !showPath
+    if(showPath){
+      shapeManager.loadPath(path: selectedPath, parent: scnScene.rootNode)
+    }else{
+      shapeManager.drawView(parent: scnScene.rootNode)
     }
-    
+  }
+  
   
   @IBAction func onPlaneDetectionOnOff(_ sender: Any) {
     planeDetection = !planeDetection
@@ -683,21 +694,27 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     let tapLocation = sender.location(in: scnView)
     let hitResultsIns = scnView.hitTest(tapLocation, types: .featurePoint)
     let hitResultsNode = scnView.hitTest(tapLocation, options: [:])
-    if hitResultsNode.count > 0{
-      let result = hitResultsNode[0] as! SCNHitTestResult
-      let node = result.node
-      if deleteNode{
-        print("Deleted Node")
-        print(node.name)
-        node.removeFromParentNode()
-      }else{
-        print("Rotate Node")
-        node.runAction(SCNAction.rotateBy(x: 0, y: (45 * .pi / 180), z: 0, duration: 0))
+    if(!showPath){
+      if (hitResultsNode.count > 0) {
+        let result = hitResultsNode[0] as! SCNHitTestResult
+        let node = result.node
+        let shapeNode = shapeManager.findShapeNode("\(node.name)")
+        if deleteNode{
+          print("Deleted Node")
+          print(node.name)
+          shapeManager.removeNode(node.name!)
+          node.removeFromParentNode()
+        }else{
+          print("Rotate Node")
+          //node.runAction(SCNAction.rotateBy(x: 0, y: (45 * .pi / 180), z: 0, duration: 0))
+          shapeNode.rotateNode(x: 0, y: 45, z: 0)
+        }
+      }else if let result = hitResultsIns.first{
+        print("Placed Node")
+        let pose = LibPlacenote.instance.processPose(pose: result.worldTransform)
+        shapeManager.spawnShape(position: pose.position(), nodeType: selectedNodeType, path: selectedPath)
       }
-    }else if let result = hitResultsIns.first {
-      print("Placed Node")
-      let pose = LibPlacenote.instance.processPose(pose: result.worldTransform)
-      shapeManager.spawnShape(position: pose.position(), nodeType: selectedNodeType, path: selectedPath)
+      
     }
   }
   

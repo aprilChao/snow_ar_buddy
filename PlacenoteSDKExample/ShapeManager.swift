@@ -47,7 +47,7 @@ func generateRandomColor() -> UIColor {
 
 //Class to manage a list of shapes to be view in Augmented Reality including spawning, managing a list and saving/retrieving from persistent memory using JSON
 class ShapeManager {
-    private var nodeName: Int = 0
+    private var nodeNameNum: Int = 1000
     private var scnScene: SCNScene!
     private var scnView: SCNView!
     
@@ -69,6 +69,27 @@ class ShapeManager {
             }
         }
         return shapeArray
+    }
+    
+    func findShapeNode(_ name: String) -> ShapeNode{
+        for shape in shapeNodes{
+            let node = shape.getNode()
+            if(node.name == name){
+                return shape
+            }
+        }
+        //replace this with something else! 
+        return shapeNodes[0]
+    }
+    
+    func removeNode(_ name: String){
+        var index = -1
+        for i in 0...(shapeNodes.count-1){
+            if(shapeNodes[i].getNode().name == name){
+                index = i
+            }
+        }
+        shapeNodes.remove(at: index)
     }
     
     // Load shape array
@@ -100,6 +121,7 @@ class ShapeManager {
     
     func drawView(parent: SCNNode) {
         print("run drawView")
+        clearView()
         if(shapeNodes.count <= 0){
             print("no shapepositions")
             return
@@ -147,20 +169,20 @@ class ShapeManager {
     }
     
     func placeShape (position: SCNVector3, type: ShapeType, color: String, path: Int) {
-        let shapeNode = ShapeNode(name: nodeName, type: type, path: path, color: color, position: position, orientation: [0,0,0], scale: [0.5,0.5,0.5])
-        nodeName += 1
+        let shapeNode = ShapeNode(type: type, path: path, color: color, position: position, orientation: [0,0,0], scale: [0.5,0.5,0.5])
         let node = shapeNode.getNode()
         if(selectedSegment == 0){
-            node.name = "Start"
+            node.name = "Start\(nodeNameNum)"
             shapeNode.scaleNode(x: 0.2, y: 0.2, z: 0.2)
         }else if(selectedSegment == 1){
-            node.name = "Arrow"
+            node.name = "Arrow\(nodeNameNum)"
             shapeNode.rotateNode(x: 90, y: 180, z: 0)
             shapeNode.scaleNode(x: 0.4, y: 0.4, z: 0.3)
         }else{
-            node.name = "Destination"
+            node.name = "Destination\(nodeNameNum)"
             shapeNode.scaleNode(x: 0.18, y: 0.2, z: 0.18)
         }
+        nodeNameNum += 1
         shapeNodes.append(shapeNode)
         scnScene.rootNode.addChildNode(node)
         shapesDrawn = true
