@@ -161,6 +161,7 @@ class ShapeManager {
             node.name = "Destination"
             shapeNode.scaleNode(x: 0.18, y: 0.2, z: 0.18)
         }
+        shapeNodes.append(shapeNode)
         scnScene.rootNode.addChildNode(node)
         shapesDrawn = true
     }

@@ -74,12 +74,12 @@ class ShapeNode{
     
     func createNode() -> SCNNode{
             let geometry: SCNGeometry = ShapeType.generateGeometry(s_type: nodeType)
-            geometry.materials.first?.diffuse.contents = nodeColor
+            geometry.materials.first?.diffuse.contents = getColor()
             
             let geometryNode = SCNNode(geometry: geometry)
             geometryNode.position = nodePosition
             geometryNode.physicsBody = SCNPhysicsBody.static()
-            if nodePath == 1{
+            if nodeType.rawValue == 1{
                 scaleNode(x:0.5, y:0.5, z:0.4)
             }else{
                 scaleNode(x:0.2, y:0.2, z:0.2)
