@@ -47,14 +47,11 @@ func generateRandomColor() -> UIColor {
 
 //Class to manage a list of shapes to be view in Augmented Reality including spawning, managing a list and saving/retrieving from persistent memory using JSON
 class ShapeManager {
-    
+    private var nodeName: Int = 0 
     private var scnScene: SCNScene!
     private var scnView: SCNView!
     
-    private var shapePositions: [SCNVector3] = []
-    private var shapeTypes: [ShapeType] = []
-    private var shapeNodes: [SCNNode] = []
-    private var shapePaths: [Int] = []
+    private var shapeNodes: [ShapeNode] = []
     
     public var shapesDrawn: Bool! = false
     private var selectedSegment: Int = 0
@@ -64,18 +61,18 @@ class ShapeManager {
         scnView = view
     }
     
-    func getShapeArray() -> [[String: [String: String]]] {
-        var shapeArray: [[String: [String: String]]] = []
-        if (shapePositions.count > 0) {
-            for i in 0...(shapePositions.count-1) {
-                shapeArray.append(["shape": ["style": "\(shapeTypes[i].rawValue)", "x": "\(shapePositions[i].x)",  "y": "\(shapePositions[i].y)",  "z": "\(shapePositions[i].z)", "path": "\(shapePaths[i])" ]])
+    func getShapeArray() -> [[String: String]] {
+        var shapeArray: [[String: String]] = []
+        if (shapeNodes.count > 0) {
+            for i in 0...(shapeNodes.count-1) {
+                shapeArray.append(shapeNodes[i].toString())
             }
         }
         return shapeArray
     }
     
     // Load shape array
-    func loadShapeArray(shapeArray: [[String: [String: String]]]?) -> Bool {
+    func loadShapeArray(shapeArray: [[String: String]]?) -> Bool {
         clearShapes() //clear currently viewing shapes and delete any record of them.
         
         if (shapeArray == nil) {
@@ -84,26 +81,18 @@ class ShapeManager {
         }
         
         for item in shapeArray! {
-            let x_string: String = item["shape"]!["x"]!
-            let y_string: String = item["shape"]!["y"]!
-            let z_string: String = item["shape"]!["z"]!
-            let position: SCNVector3 = SCNVector3(x: Float(x_string)!, y: Float(y_string)!, z: Float(z_string)!)
-            let path: Int = Int(item["shape"]!["path"]!)!
-            let type: ShapeType = ShapeType(rawValue: Int(item["shape"]!["style"]!)!)!
-            shapePositions.append(position)
-            shapeTypes.append(type)
-            shapeNodes.append(createShape(position: position, type: type, color: getColor()))
-            shapePaths.append(path)
+            shapeNodes.append(ShapeNode.toNode(item))
             
-            print ("Shape Manager: Retrieved " + String(describing: type) + " type at position" + String (describing: position))
+            print ("Shape Manager: Retrieved ")
         }
         
-        print ("Shape Manager: retrieved " + String(shapePositions.count) + " shapes")
+        print ("Shape Manager: retrieved " + String(shapeNodes.count) + " shapes")
         return true
     }
     
     func clearView() { //clear shapes from view
-        for shape in shapeNodes {
+        for shapeNode in shapeNodes {
+            let shape = shapeNode.getNode()
             shape.removeFromParentNode()
         }
         shapesDrawn = false
@@ -111,111 +100,79 @@ class ShapeManager {
     
     func drawView(parent: SCNNode) {
         print("run drawView")
-        if(shapePositions.count <= 0){
+        if(shapeNodes.count <= 0){
             print("no shapepositions")
             return
         }
         for shape in shapeNodes {
-            parent.addChildNode(shape)
+            parent.addChildNode(shape.getNode())
         }
         shapesDrawn = true
     }
     
     func clearShapes() { //delete all nodes and record of all shapes
         clearView()
-        for node in shapeNodes {
+        for shapeNode in shapeNodes {
+            let node = shapeNode.getNode()
             node.geometry!.firstMaterial!.normal.contents = nil
             node.geometry!.firstMaterial!.diffuse.contents = nil
         }
         shapeNodes.removeAll()
-        shapePositions.removeAll()
-        shapeTypes.removeAll()
     }
     
     func getShapeNodes() -> [SCNNode]{
-        return shapeNodes
+        var nodeArray: [SCNNode] = []
+        for shapeNode in shapeNodes {
+            nodeArray.append(shapeNode.getNode())
+        }
+        return nodeArray
     }
     
     func spawnShape(position: SCNVector3, nodeType: Int, path: Int) {
         //let shapeType: ShapeType = ShapeType.random()
         selectedSegment = nodeType
         let shapeType: ShapeType
-        let color: UIColor
+        let color: String
         if(nodeType == 1){
             shapeType = ShapeType.genArrow()
-            color = UIColor(red: 0.344, green: 0.972, blue: 1.000, alpha: 1.000)
+            color = "blue"
         }else if(nodeType == 0){
             shapeType = ShapeType.genSphere()
-            color = UIColor.purple
+            color = "purple"
         }else{
             shapeType = ShapeType.genPyramid()
-            color = UIColor.green
+            color = "green"
         }
         placeShape(position: position, type: shapeType, color: color, path: path)
     }
     
-    func getColor() -> UIColor{
-        let color: UIColor
-        if(selectedSegment == 1){
-            color = UIColor(red: 0.344, green: 0.972, blue: 1.000, alpha: 1.000)
-        }else if(selectedSegment == 0){
-            color = UIColor.purple
-        }else{
-            color = UIColor.green
-        }
-        return color
-    }
-    
-    func placeShape (position: SCNVector3, type: ShapeType, color: UIColor, path: Int) {
-        
-        let geometryNode: SCNNode = createShape(position: position, type: type, color: color)
+    func placeShape (position: SCNVector3, type: ShapeType, color: String, path: Int) {
+        let shapeNode = ShapeNode(name: nodeName, type: type, path: path, color: color, position: position, orientation: [0,0,0], scale: [1,1,1])
+        nodeName += 1
+        let node = shapeNode.getNode()
         if(selectedSegment == 0){
-            geometryNode.name = "Start"
+            node.name = "Start"
         }else if(selectedSegment == 1){
-            geometryNode.name = "Arrow"
-            geometryNode.runAction(SCNAction.rotateBy(x: 0, y: (180 * .pi / 180), z: 0, duration: 0))
-            geometryNode.runAction(SCNAction.rotateBy(x: (90 * .pi / 180), y: 0, z: 0, duration: 0)) 
+            node.name = "Arrow"
+            shapeNode.rotateNode(x: 90, y: 180, z: 0)
         }else{
-            geometryNode.name = "Destination"
+            node.name = "Destination"
         }
-        shapePositions.append(position)
-        shapeTypes.append(type)
-        shapeNodes.append(geometryNode)
-        shapePaths.append(path)
-        
-        scnScene.rootNode.addChildNode(geometryNode)
+        scnScene.rootNode.addChildNode(node)
         shapesDrawn = true
-    }
-    
-    func createShape (position: SCNVector3, type: ShapeType, color: UIColor) -> SCNNode {
-        
-        let geometry:SCNGeometry = ShapeType.generateGeometry(s_type: type)
-        //let color = generateRandomColor()
-        geometry.materials.first?.diffuse.contents = color
-        
-        let geometryNode = SCNNode(geometry: geometry)
-        geometryNode.position = position
-        geometryNode.physicsBody = SCNPhysicsBody.static()
-        if selectedSegment == 1{
-            geometryNode.scale = SCNVector3(x:0.5, y:0.5, z:0.4)
-        }else{
-            geometryNode.scale = SCNVector3(x:0.2, y:0.2, z:0.2)
-        }
-        
-        return geometryNode
     }
     
     func loadPath(path: Int, parent: SCNNode){
         clearView()
         print("run loadpath")
         var pathNodes: [SCNNode] = []
-        if(shapePositions.count <= 0){
+        if(shapeNodes.count <= 0){
             print("no shapepositions")
             return
         }
-        for i in 0...(shapePositions.count-1) {
-            if(path == shapePaths[i]){
-                pathNodes.append(shapeNodes[i])
+        for i in 0...(shapeNodes.count-1) {
+            if(path == shapeNodes[i].getPath()){
+                pathNodes.append(shapeNodes[i].getNode())
             }
         }
         for shape in pathNodes {

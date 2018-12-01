@@ -612,7 +612,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
                                       
                                       //Use metadata acquired from fetchMapList
                                       let userdata = self.maps[indexPath.row].1.userdata as? [String:Any]
-                                      if (self.shapeManager.loadShapeArray(shapeArray: userdata?["shapeArray"] as? [[String: [String: String]]])) {
+                                      if (self.shapeManager.loadShapeArray(shapeArray: userdata?["shapeArray"] as? [[String: String]])) {
                                         self.statusLabel.text = "Map Loaded. Look Around"
                                       } else {
                                         self.statusLabel.text = "Map Loaded. Shape file not found"
