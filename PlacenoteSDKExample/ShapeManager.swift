@@ -54,6 +54,7 @@ class ShapeManager {
     private var shapePositions: [SCNVector3] = []
     private var shapeTypes: [ShapeType] = []
     private var shapeNodes: [SCNNode] = []
+    private var shapePaths: [Int] = []
     
     public var shapesDrawn: Bool! = false
     private var selectedSegment: Int = 0
@@ -67,7 +68,7 @@ class ShapeManager {
         var shapeArray: [[String: [String: String]]] = []
         if (shapePositions.count > 0) {
             for i in 0...(shapePositions.count-1) {
-                shapeArray.append(["shape": ["style": "\(shapeTypes[i].rawValue)", "x": "\(shapePositions[i].x)",  "y": "\(shapePositions[i].y)",  "z": "\(shapePositions[i].z)" ]])
+                shapeArray.append(["shape": ["style": "\(shapeTypes[i].rawValue)", "x": "\(shapePositions[i].x)",  "y": "\(shapePositions[i].y)",  "z": "\(shapePositions[i].z)", "path": "\(shapePaths[i])" ]])
             }
         }
         return shapeArray
@@ -87,10 +88,12 @@ class ShapeManager {
             let y_string: String = item["shape"]!["y"]!
             let z_string: String = item["shape"]!["z"]!
             let position: SCNVector3 = SCNVector3(x: Float(x_string)!, y: Float(y_string)!, z: Float(z_string)!)
+            let path: Int = Int(item["shape"]!["path"]!)!
             let type: ShapeType = ShapeType(rawValue: Int(item["shape"]!["style"]!)!)!
             shapePositions.append(position)
             shapeTypes.append(type)
             shapeNodes.append(createShape(position: position, type: type, color: getColor()))
+            shapePaths.append(path)
             
             print ("Shape Manager: Retrieved " + String(describing: type) + " type at position" + String (describing: position))
         }
@@ -107,7 +110,11 @@ class ShapeManager {
     }
     
     func drawView(parent: SCNNode) {
-        guard !shapesDrawn else {return}
+        print("run drawView")
+        if(shapePositions.count <= 0){
+            print("no shapepositions")
+            return
+        }
         for shape in shapeNodes {
             parent.addChildNode(shape)
         }
@@ -129,7 +136,7 @@ class ShapeManager {
         return shapeNodes
     }
     
-    func spawnShape(position: SCNVector3, nodeType: Int) {
+    func spawnShape(position: SCNVector3, nodeType: Int, path: Int) {
         //let shapeType: ShapeType = ShapeType.random()
         selectedSegment = nodeType
         let shapeType: ShapeType
@@ -144,7 +151,7 @@ class ShapeManager {
             shapeType = ShapeType.genPyramid()
             color = UIColor.green
         }
-        placeShape(position: position, type: shapeType, color: color)
+        placeShape(position: position, type: shapeType, color: color, path: path)
     }
     
     func getColor() -> UIColor{
@@ -159,7 +166,7 @@ class ShapeManager {
         return color
     }
     
-    func placeShape (position: SCNVector3, type: ShapeType, color: UIColor) {
+    func placeShape (position: SCNVector3, type: ShapeType, color: UIColor, path: Int) {
         
         let geometryNode: SCNNode = createShape(position: position, type: type, color: color)
         if(selectedSegment == 0){
@@ -174,6 +181,7 @@ class ShapeManager {
         shapePositions.append(position)
         shapeTypes.append(type)
         shapeNodes.append(geometryNode)
+        shapePaths.append(path)
         
         scnScene.rootNode.addChildNode(geometryNode)
         shapesDrawn = true
@@ -196,5 +204,24 @@ class ShapeManager {
         
         return geometryNode
     }
-
+    
+    func loadPath(path: Int, parent: SCNNode){
+        clearView()
+        print("run loadpath")
+        var pathNodes: [SCNNode] = []
+        if(shapePositions.count <= 0){
+            print("no shapepositions")
+            return
+        }
+        for i in 0...(shapePositions.count-1) {
+            if(path == shapePaths[i]){
+                pathNodes.append(shapeNodes[i])
+            }
+        }
+        for shape in pathNodes {
+            parent.addChildNode(shape)
+        }
+        shapesDrawn = true
+    }
+    
 }

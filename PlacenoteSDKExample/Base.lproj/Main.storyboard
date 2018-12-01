@@ -148,6 +148,20 @@
                                 <color key="textColor" red="0.32549019610000002" green="0.84313725490000002" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="XUg-N5-vfq" userLabel="Path Selection">
+                                <rect key="frame" x="13" y="200" width="244" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="0.75" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <segments>
+                                    <segment title="Path 1"/>
+                                    <segment title="Path 2"/>
+                                    <segment title="Path 3"/>
+                                </segments>
+                                <color key="tintColor" red="0.32549019610000002" green="0.84313725490000002" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="pathDetection:" destination="BV1-FR-VrT" eventType="valueChanged" id="q4K-uU-7GG"/>
+                                </connections>
+                            </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Path Selection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Re-co-YzB" userLabel="Path Label">
                                 <rect key="frame" x="20" y="172" width="110" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -164,34 +178,35 @@
                                 </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xXY-Ci-vxs" userLabel="Collision Selection">
-                                <rect key="frame" x="347" y="200" width="49" height="31"/>
+                                <rect key="frame" x="341" y="199" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="toggleCollisionFeature:" destination="BV1-FR-VrT" eventType="valueChanged" id="uU5-7x-NSl"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Collision" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgI-ZN-vX0" userLabel="Collision Label">
-                                <rect key="frame" x="338" y="174" width="65" height="21"/>
+                                <rect key="frame" x="343" y="172" width="65" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.75" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.32549019610000002" green="0.84313725490000002" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="XUg-N5-vfq" userLabel="Path Selection">
-                                <rect key="frame" x="13" y="200" width="244" height="29"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enable Paths" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zhq-tz-xsQ" userLabel="Path Enabler Label">
+                                <rect key="frame" x="13" y="236" width="99" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.75" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <segments>
-                                    <segment title="Path 1"/>
-                                    <segment title="Path 2"/>
-                                    <segment title="Path 3"/>
-                                </segments>
-                                <color key="tintColor" red="0.32549019610000002" green="0.84313725490000002" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.32549019610000002" green="0.84313725490000002" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="WLS-17-Z1K" userLabel="Path Enabler">
+                                <rect key="frame" x="13" y="265" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="pathDetection:" destination="BV1-FR-VrT" eventType="valueChanged" id="q4K-uU-7GG"/>
+                                    <action selector="togglePath:" destination="BV1-FR-VrT" eventType="valueChanged" id="2S4-yM-ujD"/>
                                 </connections>
-                            </segmentedControl>
+                            </switch>
                         </subviews>
                         <constraints>
                             <constraint firstItem="7Ae-0m-BXK" firstAttribute="width" secondItem="0ka-cC-Twy" secondAttribute="width" id="0YU-td-UjS"/>
@@ -247,6 +262,8 @@
                         <outlet property="newMapButton" destination="5Mu-1V-Uq4" id="1Fz-Pc-jo4"/>
                         <outlet property="nodeTypeLabel" destination="egn-60-hUV" id="vJn-mw-g8u"/>
                         <outlet property="nodeTypeSelection" destination="e1P-sG-sey" id="fL1-5z-3ra"/>
+                        <outlet property="pathEnabler" destination="WLS-17-Z1K" id="N2N-VN-M07"/>
+                        <outlet property="pathEnablerLabel" destination="Zhq-tz-xsQ" id="Ko3-d4-xkJ"/>
                         <outlet property="pathLabel" destination="6Re-co-YzB" id="u7g-DD-tlU"/>
                         <outlet property="pathSelection" destination="XUg-N5-vfq" id="21z-ja-5Kk"/>
                         <outlet property="pickMapButton" destination="hwi-h6-3TD" id="Wzk-Ng-ZJF"/>
