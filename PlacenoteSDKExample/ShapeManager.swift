@@ -169,18 +169,18 @@ class ShapeManager {
     }
     
     func placeShape (position: SCNVector3, type: ShapeType, color: String, path: Int) {
-        let shapeNode = ShapeNode(type: type, path: path, color: color, position: position, orientation: [0,0,0], scale: [0.5,0.5,0.5])
+        let shapeNode = ShapeNode(type: type, path: path, color: color, position: position, orientation: [0,0,0])
         let node = shapeNode.getNode()
         if(selectedSegment == 0){
             node.name = "Start\(nodeNameNum)"
-            shapeNode.scaleNode(x: 0.2, y: 0.2, z: 0.2)
+            //shapeNode.scaleNode(x: 0.2, y: 0.2, z: 0.2)
         }else if(selectedSegment == 1){
             node.name = "Arrow\(nodeNameNum)"
             shapeNode.rotateNode(x: 90, y: 180, z: 0)
-            shapeNode.scaleNode(x: 0.4, y: 0.4, z: 0.3)
+            //shapeNode.scaleNode(x: 0.4, y: 0.4, z: 0.3)
         }else{
             node.name = "Destination\(nodeNameNum)"
-            shapeNode.scaleNode(x: 0.18, y: 0.2, z: 0.18)
+            //shapeNode.scaleNode(x: 0.18, y: 0.2, z: 0.18)
         }
         nodeNameNum += 1
         shapeNodes.append(shapeNode)
