@@ -24,8 +24,10 @@ class ShapeNode{
         nodeType = type
         nodeColor = color
         nodePosition = position
+        nodePosition.y = 0
         nodeOrientation = orientation
         node = createNode()
+        node.runAction(SCNAction.rotateBy(x: toRadian(nodeOrientation[0]), y: toRadian(nodeOrientation[1]), z: toRadian(nodeOrientation[2]), duration: 0))
     }
     
     func toRadian(_ degrees: CGFloat)-> CGFloat{

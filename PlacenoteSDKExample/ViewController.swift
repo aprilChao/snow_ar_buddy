@@ -139,11 +139,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   }
   
   func createCameraNode(){
-    let ball = SCNCapsule(capRadius:0.1, height:2.0)
+    let ball = SCNCapsule(capRadius:0.05, height:2.0)
     ball.materials.first?.diffuse.contents = UIColor(hue: 0, saturation: 0, brightness: 0, alpha: 0)
     //ball.materials.first?.diffuse.contents = UIColor.red
     cameraNode = SCNNode(geometry: ball)
-    cameraNode.position = SCNVector3Make(0, 0, -1)
+    cameraNode.position = SCNVector3Make(0, 0, 0.5)
     cameraNode.name = "Camera"
     
     let body = SCNPhysicsBody(type: .kinematic, shape: SCNPhysicsShape(node: cameraNode))
@@ -693,11 +693,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   @objc func handleTap(sender: UITapGestureRecognizer) {
     let tapLocation = sender.location(in: scnView)
     let hitResultsIns = scnView.hitTest(tapLocation, types: .featurePoint)
-    let hitResultsNode = scnView.hitTest(tapLocation, options: [:])
+    let hitResultsNode = scnView.hitTest(tapLocation, options: [SCNHitTestOption.categoryBitMask : 1])
     if(!showPath){
       if (hitResultsNode.count > 0) {
         let result = hitResultsNode[0] as! SCNHitTestResult
         let node = result.node
+        guard let name = node.name else {
+          let result = hitResultsIns.first
+          print("Placed Node")
+          let pose = LibPlacenote.instance.processPose(pose: result!.worldTransform)
+          shapeManager.spawnShape(position: pose.position(), nodeType: selectedNodeType, path: selectedPath)
+          return
+        }
         print("hit: \(node.name)")
         let shapeNode = shapeManager.findShapeNode(node.name!)
         if deleteNode{
