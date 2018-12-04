@@ -1,6 +1,3 @@
 *.xcuserdatad
 *.xcuserstate
-Podfile
-Podfile.lock
-/Pods/PlacenoteSDK
 
