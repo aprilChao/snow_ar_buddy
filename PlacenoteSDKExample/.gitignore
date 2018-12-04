@@ -1,0 +1,16 @@
+# system files
+.DS_Store
+*.lock
+
+# cocoapods
+Pods/
+!Podfile
+!Podfile.lock
+
+# workspace data
+*.xcworkspacedata
+*.xcuserdatad
+*.xcuserstate
+
+# constants
+PlacenoteSDKExamples/Constants.plist
