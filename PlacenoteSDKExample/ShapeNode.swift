@@ -24,8 +24,10 @@ class ShapeNode{
         nodeType = type
         nodeColor = color
         nodePosition = position
+        nodePosition.y = level
         nodeOrientation = orientation
         node = createNode()
+        node.runAction(SCNAction.rotateBy(x: toRadian(nodeOrientation[0]), y: toRadian(nodeOrientation[1]), z: toRadian(nodeOrientation[2]), duration: 0))
     }
     
     func toRadian(_ degrees: CGFloat)-> CGFloat{
@@ -38,6 +40,13 @@ class ShapeNode{
         nodeOrientation[2] += z
         print(nodeOrientation)
         node.runAction(SCNAction.rotateBy(x: toRadian(x), y: toRadian(y), z: toRadian(z), duration: 0))
+    }
+    
+    func moveNode(x: Float, y: Float, z: Float){
+        nodePosition.x += x
+        nodePosition.y += y
+        nodePosition.z += z
+        node.runAction(SCNAction.move(by: SCNVector3(x: x, y: y, z: z), duration: 0))
     }
 
     func getPath() -> Int{
@@ -77,7 +86,7 @@ class ShapeNode{
     }
     
     func toString() -> [String: String]{
-        let temp = ["path": "\(nodePath)", "type": "\(nodeType.rawValue)", "color": "\(nodeColor)", "pos-x": "\(nodePosition.x)",  "pos-y": "\(nodePosition.y)",  "pos-z": "\(nodePosition.z)", "orient-x": "\(nodeOrientation[0])", "orient-y": "\(nodeOrientation[1])", "orient-z": "\(nodeOrientation[2])"]
+        let temp = ["path": "\(nodePath)", "type": "\(nodeType.rawValue)", "color": "\(nodeColor)", "pos-x": "\(nodePosition.x)",  "pos-y": "0",  "pos-z": "\(nodePosition.z)", "orient-x": "\(nodeOrientation[0])", "orient-y": "\(nodeOrientation[1])", "orient-z": "\(nodeOrientation[2])"]
         print(temp)
         return temp
     }

@@ -44,6 +44,7 @@ func generateRandomColor() -> UIColor {
     return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1)
 }
 
+var level: Float = 0
 
 //Class to manage a list of shapes to be view in Augmented Reality including spawning, managing a list and saving/retrieving from persistent memory using JSON
 class ShapeManager {
@@ -59,6 +60,12 @@ class ShapeManager {
     init(scene: SCNScene, view: SCNView) {
         scnScene = scene
         scnView = view
+    }
+    
+    func resetArrayColors(){
+        for shape in shapeNodes{
+            shape.getNode().opacity = 1
+        }
     }
     
     func getShapeArray() -> [[String: String]] {
@@ -90,6 +97,13 @@ class ShapeManager {
             }
         }
         shapeNodes.remove(at: index)
+    }
+    
+    func changeLevel(_ amount: Float){
+        level += amount
+        for shape in shapeNodes{
+            shape.moveNode(x: 0, y: amount, z: 0)
+        }
     }
     
     // Load shape array
@@ -174,13 +188,19 @@ class ShapeManager {
         if(selectedSegment == 0){
             node.name = "Start\(nodeNameNum)"
             //shapeNode.scaleNode(x: 0.2, y: 0.2, z: 0.2)
+            node.physicsBody?.categoryBitMask = BodyType.start.rawValue
+            print(node.physicsBody?.categoryBitMask)
         }else if(selectedSegment == 1){
             node.name = "Arrow\(nodeNameNum)"
             shapeNode.rotateNode(x: 90, y: 180, z: 0)
             //shapeNode.scaleNode(x: 0.4, y: 0.4, z: 0.3)
+            node.physicsBody?.categoryBitMask = BodyType.arrow.rawValue
+            print(node.physicsBody?.categoryBitMask)
         }else{
             node.name = "Destination\(nodeNameNum)"
             //shapeNode.scaleNode(x: 0.18, y: 0.2, z: 0.18)
+            node.physicsBody?.categoryBitMask = BodyType.destination.rawValue
+            print(node.physicsBody?.categoryBitMask)
         }
         nodeNameNum += 1
         shapeNodes.append(shapeNode)
