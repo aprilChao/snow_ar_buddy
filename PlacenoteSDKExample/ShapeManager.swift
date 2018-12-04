@@ -62,6 +62,12 @@ class ShapeManager {
         scnView = view
     }
     
+    func resetArrayColors(){
+        for shape in shapeNodes{
+            shape.getNode().opacity = 1
+        }
+    }
+    
     func getShapeArray() -> [[String: String]] {
         var shapeArray: [[String: String]] = []
         if (shapeNodes.count > 0) {

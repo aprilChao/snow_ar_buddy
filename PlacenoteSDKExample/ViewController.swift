@@ -454,6 +454,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         createCameraNode()
       }else{
         cameraNode.removeFromParentNode()
+        shapeManager.resetArrayColors()
       }
       print("toggle Collision")
       print(collisionFeature)
