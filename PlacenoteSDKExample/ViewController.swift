@@ -44,16 +44,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   @IBOutlet var fileTransferLabel: UILabel!
   @IBOutlet var nodeTypeSelection: UISegmentedControl!
   @IBOutlet var nodeTypeLabel: UILabel!
-  @IBOutlet var collisionLabel: UILabel!
-  @IBOutlet var collisionSelection: UISwitch!
   @IBOutlet var pathSelection: UISegmentedControl!
   @IBOutlet var pathLabel: UILabel!
-  @IBOutlet var pathEnablerLabel: UILabel!
-  @IBOutlet var pathEnabler: UISwitch!
   @IBOutlet var levelLabel: UILabel!
   @IBOutlet var levelUpButton: UIButton!
   @IBOutlet var levelDownButton: UIButton!
-  
+    @IBOutlet var creatorModeSelection: UISwitch!
+    @IBOutlet var creatorModeLabel: UILabel!
+    
   //AR Scene
   private var scnScene: SCNScene!
   private var cameraNode: SCNNode!
@@ -80,7 +78,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   private var planesVizNodes = [UUID: SCNNode]();
   
   private var showFeatures: Bool = true
-  private var showPath: Bool = false
+  private var creationMode: Bool = false
   private var planeDetection: Bool = false
   private var deleteNode: Bool = false
   private var collisionFeature: Bool = false
@@ -438,6 +436,29 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     }
   }
     
+    @IBAction func toggleCreatorMode(_ sender: Any) {
+        creationMode = !creationMode
+        planeDetLabel.isHidden = creationMode
+        planeDetSelection.isHidden = creationMode
+        showPNLabel.isHidden = creationMode
+        showPNSelection.isHidden = creationMode
+        deleteNodeLabel.isHidden = creationMode
+        deleteNodeSelection.isHidden = creationMode
+        nodeTypeLabel.isHidden = creationMode
+        nodeTypeSelection.isHidden = creationMode
+        levelLabel.isHidden = creationMode
+        levelUpButton.isHidden = creationMode
+        levelDownButton.isHidden = creationMode
+      collisionFeature = !collisionFeature
+      if(collisionFeature){
+        createCameraNode()
+      }else{
+        cameraNode.removeFromParentNode()
+      }
+      print("toggle Collision")
+      print(collisionFeature)
+    }
+    
     @IBAction func increaseLevel(_ sender: Any) {
         shapeManager.changeLevel(0.1);
     }
@@ -459,16 +480,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     print("Selected Segment: \(selectedNodeType)")
   }
   
-  @IBAction func togglePath(_ sender: Any) {
-    showPath = !showPath
-    /*if(showPath){
-      shapeManager.loadPath(path: selectedPath, parent: scnScene.rootNode)
-    }else{
-      shapeManager.drawView(parent: scnScene.rootNode)
-    }*/
-  }
-  
-  
   @IBAction func onPlaneDetectionOnOff(_ sender: Any) {
     planeDetection = !planeDetection
     configureSession()
@@ -483,11 +494,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     selectedPath = sender.selectedSegmentIndex
     print("Selected Path: \(selectedPath + 1)")
     shapeManager.loadPath(path: selectedPath, parent: scnScene.rootNode)
-    /*if(showPath){
-      shapeManager.loadPath(path: selectedPath, parent: scnScene.rootNode)
-    }else{
-      shapeManager.drawView(parent: scnScene.rootNode)
-    }*/
   }
   
   func configureSession() {
@@ -516,16 +522,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     scnView.session.run(configuration)
   }
   
-  @IBAction func toggleCollisionFeature(_ sender: Any) {
-    collisionFeature = !collisionFeature
-    if(collisionFeature){
-      createCameraNode()
-    }else{
-      cameraNode.removeFromParentNode()
-    }
-    print("toggle Collision")
-    print(collisionFeature)
-  }
   /*@IBAction func toggleCollision(_ sender: Any) {
    collisionFeature = !collisionFeature
    print("toggle Collision")
@@ -550,15 +546,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     deleteNodeSelection.isHidden = on
     nodeTypeLabel.isHidden = on
     nodeTypeSelection.isHidden = on
-    collisionLabel.isHidden = on
-    collisionSelection.isHidden = on
     pathLabel.isHidden = on
     pathSelection.isHidden = on
-    pathEnabler.isHidden = on
-    pathEnablerLabel.isHidden = on
     levelLabel.isHidden = on
     levelUpButton.isHidden = on
     levelDownButton.isHidden = on
+    creatorModeLabel.isHidden = on
+    creatorModeSelection.isHidden = on
   }
   
   // MARK: - UITableViewDelegate and UITableviewDataSource to manage retrieving, viewing, deleting and selecting maps on a TableView
@@ -709,7 +703,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     let tapLocation = sender.location(in: scnView)
     let hitResultsIns = scnView.hitTest(tapLocation, types: .featurePoint)
     let hitResultsNode = scnView.hitTest(tapLocation, options: [SCNHitTestOption.categoryBitMask : 1])
-    if(!showPath){
+    if(!creationMode){
       if (hitResultsNode.count > 0) {
         let result = hitResultsNode[0] as! SCNHitTestResult
         let node = result.node
