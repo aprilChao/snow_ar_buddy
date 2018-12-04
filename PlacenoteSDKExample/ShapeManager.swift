@@ -44,6 +44,7 @@ func generateRandomColor() -> UIColor {
     return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1)
 }
 
+var level: Float = 0
 
 //Class to manage a list of shapes to be view in Augmented Reality including spawning, managing a list and saving/retrieving from persistent memory using JSON
 class ShapeManager {
@@ -90,6 +91,13 @@ class ShapeManager {
             }
         }
         shapeNodes.remove(at: index)
+    }
+    
+    func changeLevel(_ amount: Float){
+        level += amount
+        for shape in shapeNodes{
+            shape.moveNode(x: 0, y: amount, z: 0)
+        }
     }
     
     // Load shape array

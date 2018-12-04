@@ -50,7 +50,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   @IBOutlet var pathLabel: UILabel!
   @IBOutlet var pathEnablerLabel: UILabel!
   @IBOutlet var pathEnabler: UISwitch!
-  
+  @IBOutlet var levelLabel: UILabel!
+  @IBOutlet var levelUpButton: UIButton!
+  @IBOutlet var levelDownButton: UIButton!
   
   //AR Scene
   private var scnScene: SCNScene!
@@ -435,7 +437,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
       ptViz?.disableFeaturePoints()
     }
   }
-  
+    
+    @IBAction func increaseLevel(_ sender: Any) {
+        shapeManager.changeLevel(0.1);
+    }
+    
+    @IBAction func decreaseLevel(_ sender: Any) {
+        shapeManager.changeLevel(-0.1)
+    }
+    
+    
   @IBAction func onDistanceFilterChange(_ sender: UISlider) {
     let currentValue = Float(sender.value)*maxRadiusSearch
     filterLabel1.text = String.localizedStringWithFormat("Distance filter: %.2f km", currentValue/1000.0)
@@ -544,6 +555,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     pathSelection.isHidden = on
     pathEnabler.isHidden = on
     pathEnablerLabel.isHidden = on
+    levelLabel.isHidden = on
+    levelUpButton.isHidden = on
+    levelDownButton.isHidden = on
   }
   
   // MARK: - UITableViewDelegate and UITableviewDataSource to manage retrieving, viewing, deleting and selecting maps on a TableView
