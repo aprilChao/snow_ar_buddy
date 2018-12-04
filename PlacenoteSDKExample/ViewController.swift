@@ -461,11 +461,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   
   @IBAction func togglePath(_ sender: Any) {
     showPath = !showPath
-    if(showPath){
+    /*if(showPath){
       shapeManager.loadPath(path: selectedPath, parent: scnScene.rootNode)
     }else{
       shapeManager.drawView(parent: scnScene.rootNode)
-    }
+    }*/
   }
   
   
@@ -482,11 +482,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     // 0 = path 1, 1 = path 2, 2 = path 3
     selectedPath = sender.selectedSegmentIndex
     print("Selected Path: \(selectedPath + 1)")
-    if(showPath){
+    shapeManager.loadPath(path: selectedPath, parent: scnScene.rootNode)
+    /*if(showPath){
       shapeManager.loadPath(path: selectedPath, parent: scnScene.rootNode)
     }else{
       shapeManager.drawView(parent: scnScene.rootNode)
-    }
+    }*/
   }
   
   func configureSession() {
