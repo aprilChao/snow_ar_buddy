@@ -68,30 +68,16 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="snL-gx-sgu">
-                                <rect key="frame" x="165" y="588" width="51" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="onShowFeatureChange:" destination="BV1-FR-VrT" eventType="valueChanged" id="KNj-Aj-NYv"/>
-                                </connections>
-                            </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="View PN Features" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cc9-rN-p2h">
-                                <rect key="frame" x="234" y="593" width="136" height="21"/>
+                                <rect key="frame" x="15" y="567" width="136" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.75" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.32549019610000002" green="0.84313725490000002" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SdV-TB-mkt" userLabel="PlaneDet Selection">
-                                <rect key="frame" x="165" y="537" width="51" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="onPlaneDetectionOnOff:" destination="BV1-FR-VrT" eventType="valueChanged" id="XHb-zl-foY"/>
-                                </connections>
-                            </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Plane Detection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNX-Xf-wKP" userLabel="PlaneDet Label">
-                                <rect key="frame" x="234" y="542" width="121" height="21"/>
+                                <rect key="frame" x="16" y="495" width="121" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.75" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -122,9 +108,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="XUg-N5-vfq" userLabel="Path Selection">
-                                <rect key="frame" x="65" y="650" width="244" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="XUg-N5-vfq" userLabel="Path Selection">
+                                <rect key="frame" x="15.666666666666657" y="650" width="344" height="29"/>
                                 <color key="backgroundColor" white="1" alpha="0.75" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <segments>
                                     <segment title="Path 1"/>
@@ -136,23 +121,22 @@
                                     <action selector="pathDetection:" destination="BV1-FR-VrT" eventType="valueChanged" id="q4K-uU-7GG"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Path Selection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Re-co-YzB" userLabel="Path Label">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Path Selection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Re-co-YzB" userLabel="Path Label">
                                 <rect key="frame" x="132" y="622" width="110" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.75" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.32549019610000002" green="0.84313725490000002" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="juZ-V7-vby" userLabel="Delete Selection">
-                                <rect key="frame" x="313" y="225" width="49" height="31"/>
+                                <rect key="frame" x="16" y="448" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="deleteNodesOnOff:" destination="BV1-FR-VrT" eventType="valueChanged" id="8XY-Or-ZvP"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Delete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kw6-YQ-hTd" userLabel="Delete Label">
-                                <rect key="frame" x="311" y="196" width="50" height="21"/>
+                                <rect key="frame" x="16" y="419" width="50" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.75" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -160,7 +144,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Creator Mode" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JHc-7k-ycI">
-                                <rect key="frame" x="305" y="104" width="65" height="45"/>
+                                <rect key="frame" x="16" y="315" width="65" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.75" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -168,15 +152,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hfz-Ix-3jv">
-                                <rect key="frame" x="313" y="157" width="49" height="31"/>
+                                <rect key="frame" x="16" y="374" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="toggleCreatorMode:" destination="BV1-FR-VrT" eventType="valueChanged" id="jjH-uE-7r8"/>
                                 </connections>
                             </switch>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="e1P-sG-sey" userLabel="Node Type Selection">
-                                <rect key="frame" x="8" y="133" width="244" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="e1P-sG-sey" userLabel="Node Type Selection">
+                                <rect key="frame" x="16" y="133" width="343" height="29"/>
                                 <color key="backgroundColor" white="1" alpha="0.75" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <segments>
                                     <segment title="Start"/>
@@ -188,9 +171,8 @@
                                     <action selector="nodeTypeDetection:" destination="BV1-FR-VrT" eventType="valueChanged" id="EX9-zF-Qgd"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Node Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egn-60-hUV" userLabel="Node Type Label">
-                                <rect key="frame" x="15" y="104" width="84" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Node Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egn-60-hUV" userLabel="Node Type Label">
+                                <rect key="frame" x="145.66666666666666" y="104" width="84" height="21"/>
                                 <color key="backgroundColor" white="1" alpha="0.75" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.32549019610000002" green="0.84313725490000002" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -226,18 +208,37 @@
                                     <action selector="decreaseLevel:" destination="BV1-FR-VrT" eventType="touchUpInside" id="nR6-8I-UDY"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="snL-gx-sgu">
+                                <rect key="frame" x="16" y="596" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="onShowFeatureChange:" destination="BV1-FR-VrT" eventType="valueChanged" id="KNj-Aj-NYv"/>
+                                </connections>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SdV-TB-mkt" userLabel="PlaneDet Selection">
+                                <rect key="frame" x="16" y="527" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="onPlaneDetectionOnOff:" destination="BV1-FR-VrT" eventType="valueChanged" id="XHb-zl-foY"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <constraints>
                             <constraint firstItem="7Ae-0m-BXK" firstAttribute="width" secondItem="0ka-cC-Twy" secondAttribute="width" id="0YU-td-UjS"/>
+                            <constraint firstItem="XUg-N5-vfq" firstAttribute="centerX" secondItem="BrB-h1-WRS" secondAttribute="centerX" id="2Ns-aj-GLN"/>
                             <constraint firstItem="7Ae-0m-BXK" firstAttribute="top" secondItem="0ka-cC-Twy" secondAttribute="bottom" id="57R-78-WAG"/>
                             <constraint firstItem="0ka-cC-Twy" firstAttribute="top" secondItem="3Xz-vt-npx" secondAttribute="bottom" id="5c1-dt-3UB"/>
+                            <constraint firstItem="6Re-co-YzB" firstAttribute="centerX" secondItem="XUg-N5-vfq" secondAttribute="centerX" id="98c-fd-SWN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5Mu-1V-Uq4" secondAttribute="trailing" constant="20" id="B3D-ML-y4p"/>
                             <constraint firstAttribute="trailingMargin" secondItem="0ka-cC-Twy" secondAttribute="trailing" constant="65" id="BUC-4K-9Sv"/>
                             <constraint firstItem="XLP-t5-UNJ" firstAttribute="width" secondItem="7Ae-0m-BXK" secondAttribute="width" id="CxJ-FI-Vbn"/>
+                            <constraint firstItem="e1P-sG-sey" firstAttribute="centerX" secondItem="BrB-h1-WRS" secondAttribute="centerX" id="FqJ-ix-1iY"/>
                             <constraint firstItem="3Xz-vt-npx" firstAttribute="width" secondItem="BrB-h1-WRS" secondAttribute="width" id="Gwf-xO-0NM"/>
                             <constraint firstItem="0ka-cC-Twy" firstAttribute="height" secondItem="BrB-h1-WRS" secondAttribute="height" multiplier="0.5" id="IRD-mv-C3n"/>
+                            <constraint firstItem="Oxp-Pf-bN1" firstAttribute="top" secondItem="XUg-N5-vfq" secondAttribute="bottom" constant="100" id="IVv-sf-vB4"/>
                             <constraint firstItem="BJ5-11-JDS" firstAttribute="leading" secondItem="hwi-h6-3TD" secondAttribute="leading" id="KrP-d6-XXU"/>
                             <constraint firstItem="7Ae-0m-BXK" firstAttribute="height" secondItem="BrB-h1-WRS" secondAttribute="height" multiplier="0.07" id="OiF-pQ-iwm"/>
+                            <constraint firstItem="e1P-sG-sey" firstAttribute="top" secondItem="j89-Gv-ip5" secondAttribute="bottom" constant="89" id="SOK-dI-JkC"/>
                             <constraint firstItem="Oxp-Pf-bN1" firstAttribute="top" secondItem="5Mu-1V-Uq4" secondAttribute="bottom" constant="20" id="SZu-oe-wGW"/>
                             <constraint firstItem="5Mu-1V-Uq4" firstAttribute="width" secondItem="BrB-h1-WRS" secondAttribute="width" multiplier="0.35" id="Urm-TF-hee"/>
                             <constraint firstItem="3Xz-vt-npx" firstAttribute="top" secondItem="BrB-h1-WRS" secondAttribute="top" constant="32" id="W2l-DI-x29"/>
@@ -246,13 +247,16 @@
                             <constraint firstItem="0ka-cC-Twy" firstAttribute="centerX" secondItem="BrB-h1-WRS" secondAttribute="centerX" id="Xq3-Mf-8pd"/>
                             <constraint firstItem="BJ5-11-JDS" firstAttribute="height" secondItem="hwi-h6-3TD" secondAttribute="height" multiplier="1.5" id="ZuU-za-PZg"/>
                             <constraint firstItem="Oxp-Pf-bN1" firstAttribute="top" secondItem="hwi-h6-3TD" secondAttribute="bottom" constant="20" id="agp-f5-uWc"/>
+                            <constraint firstItem="e1P-sG-sey" firstAttribute="top" secondItem="egn-60-hUV" secondAttribute="bottom" constant="8" id="cqf-PG-VzG"/>
                             <constraint firstItem="iX6-0Y-XCU" firstAttribute="trailing" secondItem="7Ae-0m-BXK" secondAttribute="trailing" id="h6j-uL-iOc"/>
                             <constraint firstItem="3Xz-vt-npx" firstAttribute="centerX" secondItem="BrB-h1-WRS" secondAttribute="centerX" id="j5W-PB-yhM"/>
                             <constraint firstItem="hwi-h6-3TD" firstAttribute="height" secondItem="BrB-h1-WRS" secondAttribute="height" multiplier="0.08" id="jIn-rx-TZX"/>
                             <constraint firstItem="XLP-t5-UNJ" firstAttribute="leading" secondItem="7Ae-0m-BXK" secondAttribute="leading" id="kHZ-BL-Ddc"/>
                             <constraint firstItem="hwi-h6-3TD" firstAttribute="width" secondItem="BrB-h1-WRS" secondAttribute="width" multiplier="0.35" id="l8w-2O-HOk"/>
                             <constraint firstItem="5Mu-1V-Uq4" firstAttribute="height" secondItem="BrB-h1-WRS" secondAttribute="height" multiplier="0.08" id="mW2-jV-Icu"/>
+                            <constraint firstItem="egn-60-hUV" firstAttribute="centerX" secondItem="e1P-sG-sey" secondAttribute="centerX" id="mzi-BA-d5z"/>
                             <constraint firstItem="hwi-h6-3TD" firstAttribute="leading" secondItem="BrB-h1-WRS" secondAttribute="leadingMargin" constant="20" id="naG-ic-JRa"/>
+                            <constraint firstItem="6Re-co-YzB" firstAttribute="leading" secondItem="XUg-N5-vfq" secondAttribute="trailing" constant="-227" id="rxy-k7-u2T"/>
                             <constraint firstItem="BJ5-11-JDS" firstAttribute="width" secondItem="hwi-h6-3TD" secondAttribute="width" id="s3L-NU-ikT"/>
                             <constraint firstItem="iX6-0Y-XCU" firstAttribute="top" secondItem="XLP-t5-UNJ" secondAttribute="bottom" id="uUw-eT-Yct"/>
                             <constraint firstItem="iX6-0Y-XCU" firstAttribute="width" secondItem="7Ae-0m-BXK" secondAttribute="width" id="xq6-vK-EN3"/>
