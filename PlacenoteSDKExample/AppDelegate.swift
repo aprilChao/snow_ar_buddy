@@ -9,6 +9,16 @@
 import UIKit
 import PlacenoteSDK
 
+func getConfigItem(name: String) -> String? {
+    let filePath = Bundle.main.path(forResource: "Constants", ofType: "plist")
+    let plist = NSDictionary(contentsOfFile: filePath!)
+    if let value = plist!.object(forKey: name) as? String {
+        return value
+    } else {
+        return nil
+    }
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -17,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-        LibPlacenote.instance.initialize(apiKey: "")
+        LibPlacenote.instance.initialize(apiKey: getConfigItem(name: "API_KEY")!)
 
         return true
     }

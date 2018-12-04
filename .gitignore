@@ -11,3 +11,6 @@ Pods/
 *.xcworkspacedata
 *.xcuserdatad
 *.xcuserstate
+
+# constants
+PlacenoteSDKExamples/Constants.plist
