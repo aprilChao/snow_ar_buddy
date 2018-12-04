@@ -13,4 +13,4 @@ Pods/
 *.xcuserstate
 
 # constants
-PlacenoteSDKExamples/Constants.plist
+PlacenoteSDKExample/Constants.plist
