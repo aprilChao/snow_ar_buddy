@@ -413,7 +413,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     }
   }
   
-  @IBAction func pickMap(_ sender: Any) {
+    @IBAction func loadMap(_ sender: Any) {
+    }
+    
+    @IBAction func pickMap(_ sender: Any) {
     
     if (localizationStarted) { // currently a map is loaded. StopSession and clearView
       shapeManager.clearShapes()

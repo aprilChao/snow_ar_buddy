@@ -152,15 +152,31 @@
                                 <color key="textColor" red="0.32549019610000002" green="0.84313725490000002" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IQR-dp-sow" userLabel="Load Map Button">
+                                <rect key="frame" x="160.66666666666666" y="772" width="93" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="93" id="Dg9-be-tel"/>
+                                    <constraint firstAttribute="height" constant="28" id="pDb-Zq-PXA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Load Map">
+                                    <color key="titleColor" red="0.32549019610000002" green="0.84313725490000002" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="loadMap:" destination="BV1-FR-VrT" eventType="touchUpInside" id="UiO-BQ-peh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Kw6-YQ-hTd" firstAttribute="centerY" secondItem="juZ-V7-vby" secondAttribute="centerY" id="1xf-Eb-Y92"/>
                             <constraint firstItem="egn-60-hUV" firstAttribute="top" secondItem="j89-Gv-ip5" secondAttribute="bottom" constant="50" id="2PM-XJ-aeK"/>
                             <constraint firstItem="WJS-gl-DTy" firstAttribute="trailing" secondItem="BrB-h1-WRS" secondAttribute="trailingMargin" id="4aK-MD-H9t"/>
+                            <constraint firstItem="IQR-dp-sow" firstAttribute="centerX" secondItem="XUg-N5-vfq" secondAttribute="centerX" id="79k-P7-4ck"/>
                             <constraint firstItem="XUg-N5-vfq" firstAttribute="top" secondItem="QV7-Fz-wUl" secondAttribute="bottom" constant="30" id="9P4-82-T5n"/>
                             <constraint firstItem="snL-gx-sgu" firstAttribute="top" secondItem="juZ-V7-vby" secondAttribute="bottom" constant="10" id="9Rq-TM-UAq"/>
                             <constraint firstItem="JHc-7k-ycI" firstAttribute="centerY" secondItem="hfz-Ix-3jv" secondAttribute="centerY" id="B50-bD-JMT"/>
                             <constraint firstItem="snL-gx-sgu" firstAttribute="leading" secondItem="BrB-h1-WRS" secondAttribute="leadingMargin" id="CVb-HR-Ugv"/>
+                            <constraint firstItem="IQR-dp-sow" firstAttribute="top" secondItem="XUg-N5-vfq" secondAttribute="bottom" constant="10" id="EHG-5U-MjY"/>
                             <constraint firstItem="juZ-V7-vby" firstAttribute="leading" secondItem="BrB-h1-WRS" secondAttribute="leadingMargin" id="Ia7-Hz-zxv"/>
                             <constraint firstItem="HNX-Xf-wKP" firstAttribute="leading" secondItem="SdV-TB-mkt" secondAttribute="trailing" constant="10" id="KAH-UT-skN"/>
                             <constraint firstItem="Oxp-Pf-bN1" firstAttribute="top" secondItem="XUg-N5-vfq" secondAttribute="bottom" constant="100" id="KBy-fl-8ho"/>
