@@ -451,6 +451,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         showPNSelection.isHidden = creationMode
         deleteNodeLabel.isHidden = creationMode
         deleteNodeSelection.isHidden = creationMode
+        wallLabel.isHidden = creationMode
+        wallEnabler.isHidden = creationMode
         nodeTypeLabel.isHidden = creationMode
         nodeTypeSelection.isHidden = creationMode
         levelLabel.isHidden = creationMode
@@ -552,6 +554,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     showPNSelection.isHidden = on
     deleteNodeLabel.isHidden = on
     deleteNodeSelection.isHidden = on
+    wallEnabler.isHidden = on
+    wallLabel.isHidden = on
     nodeTypeLabel.isHidden = on
     nodeTypeSelection.isHidden = on
     pathLabel.isHidden = on
