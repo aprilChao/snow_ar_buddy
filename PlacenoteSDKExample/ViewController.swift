@@ -115,7 +115,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     
     //UI Updates
 //    newMapButton.isEnabled = false
-//    toggleMappingUI(true) //hide mapping UI options
+    toggleMappingUI(true) //hide mapping UI options
     locationManager = CLLocationManager()
     locationManager.requestWhenInUseAuthorization()
     
@@ -125,20 +125,24 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
       locationManager.startUpdatingLocation()
     }
     
+    print("map_key" + getConfigItem(name: "MAP_KEY")!)
     LibPlacenote.instance.loadMap(mapId: getConfigItem(name: "MAP_KEY")!,
                                   downloadProgressCb: {(completed: Bool, faulted: Bool, percentage: Float) -> Void in
                                     if (completed) {
                                       LibPlacenote.instance.getMapMetadata(mapId: getConfigItem(name: "MAP_KEY")!, getMetadataCb: {(success: Bool, metadata: LibPlacenote.MapMetadata) -> Void in
                                         let userdata = metadata.userdata as? [String:Any]
                                        if (self.shapeManager.loadShapeArray(shapeArray: userdata?["shapeArray"] as? [[String: String]])) {
+                                          print("map loaded")
                                           self.statusLabel.text = "Map Loaded. Look Around"
                                         } else {
+                                          print("map not loaded")
                                           self.statusLabel.text = "Map Loaded. Shape file not found"
                                         }
                                         LibPlacenote.instance.startSession(extend: true)
                                       })
                                       self.mapStatusLabel.text = "Map Loaded. Look Around"
                                     }
+                                    print("map not completed")
     })
   }
   
@@ -453,8 +457,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     }
   }
     
-    @IBAction func toggleCreatorMode(_ sender: Any) {
-        creationMode = !creationMode
+    @IBAction func toggleCreatorMode(_ sender: UISwitch) {
+        creationMode = !sender.isOn
         planeDetLabel.isHidden = creationMode
         planeDetSelection.isHidden = creationMode
         showPNLabel.isHidden = creationMode
@@ -564,13 +568,13 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     deleteNodeSelection.isHidden = on
     nodeTypeLabel.isHidden = on
     nodeTypeSelection.isHidden = on
-    pathLabel.isHidden = on
-    pathSelection.isHidden = on
-    levelLabel.isHidden = on
-    levelUpButton.isHidden = on
-    levelDownButton.isHidden = on
-    creatorModeLabel.isHidden = on
-    creatorModeSelection.isHidden = on
+//    pathLabel.isHidden = on
+//    pathSelection.isHidden = on
+//    levelLabel.isHidden = on
+//    levelUpButton.isHidden = on
+//    levelDownButton.isHidden = on
+//    creatorModeLabel.isHidden = on
+//    creatorModeSelection.isHidden = on
   }
   
   // MARK: - UITableViewDelegate and UITableviewDataSource to manage retrieving, viewing, deleting and selecting maps on a TableView
