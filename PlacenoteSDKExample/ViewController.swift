@@ -51,7 +51,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   @IBOutlet var levelDownButton: UIButton!
   @IBOutlet var creatorModeSelection: UISwitch!
   @IBOutlet var creatorModeLabel: UILabel!
-    
+  @IBOutlet weak var mapStatusLabel: UILabel!
+  
   //AR Scene
   private var scnScene: SCNScene!
   private var cameraNode: SCNNode!
@@ -123,6 +124,22 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
       locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
       locationManager.startUpdatingLocation()
     }
+    
+    LibPlacenote.instance.loadMap(mapId: getConfigItem(name: "MAP_KEY")!,
+                                  downloadProgressCb: {(completed: Bool, faulted: Bool, percentage: Float) -> Void in
+                                    if (completed) {
+                                      LibPlacenote.instance.getMapMetadata(mapId: getConfigItem(name: "MAP_KEY")!, getMetadataCb: {(success: Bool, metadata: LibPlacenote.MapMetadata) -> Void in
+                                        let userdata = metadata.userdata as? [String:Any]
+                                       if (self.shapeManager.loadShapeArray(shapeArray: userdata?["shapeArray"] as? [[String: String]])) {
+                                          self.statusLabel.text = "Map Loaded. Look Around"
+                                        } else {
+                                          self.statusLabel.text = "Map Loaded. Shape file not found"
+                                        }
+                                        LibPlacenote.instance.startSession(extend: true)
+                                      })
+                                      self.mapStatusLabel.text = "Map Loaded. Look Around"
+                                    }
+    })
   }
   
   //Initialize view and scene

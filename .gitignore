@@ -9,6 +9,7 @@ Pods/
 
 # workspace data
 *.xcworkspacedata
+*.xcworkspace
 *.xcuserdatad
 *.xcuserstate
 

@@ -142,6 +142,16 @@
                                 <color key="textColor" red="0.32549019610000002" green="0.84313725490000002" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hB-c9-veU" userLabel="Map Status Label">
+                                <rect key="frame" x="20" y="644" width="95" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="19" id="NLK-lN-zdE"/>
+                                    <constraint firstAttribute="width" constant="95" id="yeE-Hz-4sy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.32549019610000002" green="0.84313725490000002" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Kw6-YQ-hTd" firstAttribute="centerY" secondItem="juZ-V7-vby" secondAttribute="centerY" id="1xf-Eb-Y92"/>
@@ -162,6 +172,8 @@
                             <constraint firstItem="e1P-sG-sey" firstAttribute="leading" secondItem="BrB-h1-WRS" secondAttribute="leadingMargin" id="QYC-bt-VBM"/>
                             <constraint firstItem="EkB-iD-Y7i" firstAttribute="trailing" secondItem="BrB-h1-WRS" secondAttribute="trailingMargin" id="RMn-tj-e5C"/>
                             <constraint firstItem="6Re-co-YzB" firstAttribute="centerX" secondItem="BrB-h1-WRS" secondAttribute="centerX" id="VaD-qH-yg2"/>
+                            <constraint firstItem="9hB-c9-veU" firstAttribute="leading" secondItem="BrB-h1-WRS" secondAttribute="leadingMargin" id="WAG-vo-alm"/>
+                            <constraint firstItem="hfz-Ix-3jv" firstAttribute="top" secondItem="9hB-c9-veU" secondAttribute="bottom" constant="10" id="ZD0-sQ-6kl"/>
                             <constraint firstItem="juZ-V7-vby" firstAttribute="top" secondItem="Kw6-YQ-hTd" secondAttribute="bottom" constant="-24" id="ZHK-A3-W8z"/>
                             <constraint firstItem="Cc9-rN-p2h" firstAttribute="centerY" secondItem="snL-gx-sgu" secondAttribute="centerY" id="Zq1-Io-KJh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="XUg-N5-vfq" secondAttribute="trailing" id="Zrf-1x-nit"/>
@@ -189,6 +201,7 @@
                         <outlet property="levelDownButton" destination="QV7-Fz-wUl" id="QxA-Ky-jFZ"/>
                         <outlet property="levelLabel" destination="WJS-gl-DTy" id="mNq-9E-mt5"/>
                         <outlet property="levelUpButton" destination="EkB-iD-Y7i" id="GNd-kq-8vC"/>
+                        <outlet property="mapStatusLabel" destination="9hB-c9-veU" id="xRO-wp-xy7"/>
                         <outlet property="nodeTypeLabel" destination="egn-60-hUV" id="vJn-mw-g8u"/>
                         <outlet property="nodeTypeSelection" destination="e1P-sG-sey" id="fL1-5z-3ra"/>
                         <outlet property="pathLabel" destination="6Re-co-YzB" id="u7g-DD-tlU"/>
@@ -202,7 +215,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="23.199999999999999" y="35.532233883058474"/>
+            <point key="canvasLocation" x="23.188405797101453" y="35.491071428571423"/>
         </scene>
     </scenes>
 </document>
