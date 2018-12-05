@@ -217,6 +217,7 @@
                         <outlet property="levelDownButton" destination="QV7-Fz-wUl" id="QxA-Ky-jFZ"/>
                         <outlet property="levelLabel" destination="WJS-gl-DTy" id="mNq-9E-mt5"/>
                         <outlet property="levelUpButton" destination="EkB-iD-Y7i" id="GNd-kq-8vC"/>
+                        <outlet property="loadMapButton" destination="IQR-dp-sow" id="n8j-Bl-rVM"/>
                         <outlet property="mapStatusLabel" destination="9hB-c9-veU" id="xRO-wp-xy7"/>
                         <outlet property="nodeTypeLabel" destination="egn-60-hUV" id="vJn-mw-g8u"/>
                         <outlet property="nodeTypeSelection" destination="e1P-sG-sey" id="fL1-5z-3ra"/>
