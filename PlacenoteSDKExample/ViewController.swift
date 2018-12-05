@@ -49,8 +49,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   @IBOutlet var levelLabel: UILabel!
   @IBOutlet var levelUpButton: UIButton!
   @IBOutlet var levelDownButton: UIButton!
-    @IBOutlet var creatorModeSelection: UISwitch!
-    @IBOutlet var creatorModeLabel: UILabel!
+  @IBOutlet var creatorModeSelection: UISwitch!
+  @IBOutlet var creatorModeLabel: UILabel!
     
   //AR Scene
   private var scnScene: SCNScene!
@@ -106,15 +106,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     LibPlacenote.instance.multiDelegate += self;
     
     //Initialize tableview for the list of maps
-    mapTable.delegate = self
-    mapTable.dataSource = self
-    mapTable.allowsSelection = true
-    mapTable.isUserInteractionEnabled = true
-    mapTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+//    mapTable.delegate = self
+//    mapTable.dataSource = self
+//    mapTable.allowsSelection = true
+//    mapTable.isUserInteractionEnabled = true
+//    mapTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     
     //UI Updates
-    newMapButton.isEnabled = false
-    toggleMappingUI(true) //hide mapping UI options
+//    newMapButton.isEnabled = false
+//    toggleMappingUI(true) //hide mapping UI options
     locationManager = CLLocationManager()
     locationManager.requestWhenInUseAuthorization()
     
@@ -213,9 +213,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     scnView.session.delegate = self
     scnView.isPlaying = true
     scnView.debugOptions = []
-    mapTable.isHidden = true //hide the map list until 'Load Map' is clicked
-    filterSlider.isContinuous = false
-    toggleSliderUI(true, reset: true) //hide the radius search UI, reset values as we are initializating
+//    mapTable.isHidden = true //hide the map list until 'Load Map' is clicked
+//    filterSlider.isContinuous = false
+//    toggleSliderUI(true, reset: true) //hide the radius search UI, reset values as we are initializating
     //scnView.debugOptions = ARSCNDebugOptions.showFeaturePoints
     //scnView.debugOptions = ARSCNDebugOptions.showWorldOrigin
   }
@@ -446,9 +446,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         deleteNodeSelection.isHidden = creationMode
         nodeTypeLabel.isHidden = creationMode
         nodeTypeSelection.isHidden = creationMode
-        levelLabel.isHidden = creationMode
-        levelUpButton.isHidden = creationMode
-        levelDownButton.isHidden = creationMode
+//        levelLabel.isHidden = creationMode
+//        levelUpButton.isHidden = creationMode
+//        levelDownButton.isHidden = creationMode
       collisionFeature = !collisionFeature
       if(collisionFeature){
         createCameraNode()
@@ -830,12 +830,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
       if (!trackingStarted) {
         trackingStarted = true
         print("ARKit Enabled, Start Mapping")
-        newMapButton.isEnabled = true
-        newMapButton.setTitle("New Map", for: .normal)
+//        newMapButton.isEnabled = true
+//        newMapButton.setTitle("New Map", for: .normal)
       }
       status = "Ready"
     }
-    statusLabel.text = status
+//    statusLabel.text = status
   }
   
   func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
