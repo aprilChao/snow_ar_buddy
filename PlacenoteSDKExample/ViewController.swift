@@ -51,8 +51,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   @IBOutlet var levelDownButton: UIButton!
     @IBOutlet var creatorModeSelection: UISwitch!
     @IBOutlet var creatorModeLabel: UILabel!
-    @IBOutlet var wallLabel: UILabel!
-    @IBOutlet var wallEnabler: UISwitch!
     
   //AR Scene
   private var scnScene: SCNScene!
@@ -81,7 +79,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   
   private var showFeatures: Bool = true
   private var creationMode: Bool = false
-    private var wallMode: Bool = false
   private var planeDetection: Bool = false
   private var deleteNode: Bool = false
   private var collisionFeature: Bool = false
@@ -438,11 +435,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
       ptViz?.disableFeaturePoints()
     }
   }
-    
-    @IBAction func toggleWalls(_ sender: Any) {
-        wallMode = !wallMode
-    }
-    
+  
     @IBAction func toggleCreatorMode(_ sender: Any) {
         creationMode = !creationMode
         planeDetLabel.isHidden = creationMode
@@ -451,8 +444,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
         showPNSelection.isHidden = creationMode
         deleteNodeLabel.isHidden = creationMode
         deleteNodeSelection.isHidden = creationMode
-        wallLabel.isHidden = creationMode
-        wallEnabler.isHidden = creationMode
         nodeTypeLabel.isHidden = creationMode
         nodeTypeSelection.isHidden = creationMode
         levelLabel.isHidden = creationMode
@@ -554,8 +545,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     showPNSelection.isHidden = on
     deleteNodeLabel.isHidden = on
     deleteNodeSelection.isHidden = on
-    wallEnabler.isHidden = on
-    wallLabel.isHidden = on
     nodeTypeLabel.isHidden = on
     nodeTypeSelection.isHidden = on
     pathLabel.isHidden = on

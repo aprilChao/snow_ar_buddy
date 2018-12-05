@@ -226,21 +226,6 @@
                                     <action selector="decreaseLevel:" destination="BV1-FR-VrT" eventType="touchUpInside" id="nR6-8I-UDY"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Walls" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9a-WC-FX7">
-                                <rect key="frame" x="317" y="266" width="41" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="0.75" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.32549019610000002" green="0.84313725490000002" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="mJ3-C2-ske">
-                                <rect key="frame" x="313" y="295" width="49" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="toggleWalls:" destination="BV1-FR-VrT" eventType="valueChanged" id="knW-Ir-dEh"/>
-                                </connections>
-                            </switch>
                         </subviews>
                         <constraints>
                             <constraint firstItem="7Ae-0m-BXK" firstAttribute="width" secondItem="0ka-cC-Twy" secondAttribute="width" id="0YU-td-UjS"/>
@@ -298,8 +283,6 @@
                         <outlet property="showPNLabel" destination="Cc9-rN-p2h" id="ToW-PY-abX"/>
                         <outlet property="showPNSelection" destination="snL-gx-sgu" id="bJI-IB-7Mu"/>
                         <outlet property="statusLabel" destination="3Xz-vt-npx" id="wui-wQ-DQj"/>
-                        <outlet property="wallEnabler" destination="mJ3-C2-ske" id="yXE-kq-II9"/>
-                        <outlet property="wallLabel" destination="x9a-WC-FX7" id="HbU-N3-Mz0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
